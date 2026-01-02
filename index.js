@@ -83,3 +83,18 @@ process.on('SIGTERM', () => {
 // Login to Discord
 console.log('🎁 Logging in to Discord...');
 client.login(process.env.DISCORD_TOKEN);
+
+// --- Fix for Render Deployment (Fake Web Server) ---
+const http = require('http');
+
+const server = http.createServer((req, res) => {
+    res.writeHead(200);
+    res.end('Bot is running!');
+});
+
+// Render sets the PORT environment variable automatically
+const port = process.env.PORT || 3000;
+
+server.listen(port, () => {
+    console.log(`Keep-alive server listening on port ${port}`);
+});
