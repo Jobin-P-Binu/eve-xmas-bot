@@ -1,0 +1,76 @@
+{
+    "christmasQuotes": [
+        "🎄 'Christmas waves a magic wand over this world, and behold, everything is softer and more beautiful.' - Norman Vincent Peale",
+        "🎅 'Christmas is not a time nor a season, but a state of mind. To cherish peace and goodwill, to be plenteous in mercy, is to have the real spirit of Christmas.' - Calvin Coolidge",
+        "✨ 'The best way to spread Christmas cheer is singing loud for all to hear!' - Buddy the Elf",
+        "🎁 'Christmas is doing a little something extra for someone.' - Charles M. Schulz",
+        "❄️ 'Christmas isn't a season. It's a feeling.' - Edna Ferber",
+        "🌟 'Peace on earth will come to stay, when we live Christmas every day.' - Helen Steiner Rice",
+        "🎄 'Christmas is the day that holds all time together.' - Alexander Smith",
+        "🎅 'He who has not Christmas in his heart will never find it under a tree.' - Roy L. Smith"
+    ],
+    "cheerMessages": [
+        "🌟 Keep shining bright! You're doing amazing things! ✨",
+        "💪 You've got this! Every step forward is progress! 🎄",
+        "🎁 Your positive energy makes this community magical! Keep it up! ❤️",
+        "✨ Believe in yourself - you're capable of incredible things! 🎅",
+        "🎄 Your kindness creates ripples of joy. Thank you for being you! 💚",
+        "🌟 Even small victories deserve celebration! You're doing great! 🎉",
+        "💝 Your presence here makes a difference. Keep spreading that holiday cheer! ✨"
+    ],
+    "peaceMessages": [
+        "🎄 Ho ho ho! Let's take a deep breath and keep the Christmas spirit alive, friends ❤️",
+        "🎅 Easy there, team! Christmas is all about peace and joy ✨",
+        "❄️ Let's take a breath and spread kindness—Santa's listening! 🎧",
+        "🕊️ Peace and goodwill to all! Let's keep our hearts warm and words kind 💚",
+        "✨ Remember, we're all on the same team here. Let's spread joy, not tension! 🎁",
+        "🎄 Deep breaths, friends. Let's make this season bright with understanding! 💫",
+        "🤍 Kind words are like snowflakes—they make everything more beautiful ❄️"
+    ],
+    "voiceReminders": [
+        "🎄 Ho ho ho! Let's keep the vibes warm and cheerful, friends ❤️",
+        "🎅 Easy there! Christmas is all about peace and joy ✨",
+        "❄️ Let's keep our voices merry and bright! 🎶",
+        "✨ Remember to spread joy, not noise! Santa's got his list! 📋",
+        "🎁 Keep it festive and friendly, everyone! 💚",
+        "🌟 Let's make beautiful holiday harmony together! 🎵"
+    ],
+    "praiseMessages": [
+        "🎁 You just made the server brighter, keep spreading joy! ✨",
+        "🌟 Kind words detected! Santa approves ❤️",
+        "✨ Your positivity is like a warm cup of hot cocoa! Thank you! ☕",
+        "🎄 The spirit of Christmas shines bright in you! Keep it up! 💚",
+        "🎅 Ho ho ho! Your kindness earns you extra points on Santa's nice list! 📋",
+        "❄️ You're making it feel like a winter wonderland in here! 💙"
+    ],
+    "kindnessKeywords": [
+        "thank you",
+        "thanks",
+        "appreciate",
+        "grateful",
+        "awesome",
+        "amazing",
+        "wonderful",
+        "great job",
+        "well done",
+        "love",
+        "help",
+        "support"
+    ],
+    "newYearTarget": "2027-01-01T00:00:00.000Z",
+    "cooldowns": {
+        "voiceReminder": 300000,
+        "praiseMessage": 180000
+    },
+    "botStatus": "🎄 Spreading Christmas cheer!",
+    "emojis": {
+        "christmas_tree": "🎄",
+        "santa": "🎅",
+        "gift": "🎁",
+        "snowflake": "❄️",
+        "star": "⭐",
+        "sparkles": "✨",
+        "heart": "❤️",
+        "peace": "🕊️"
+    }
+}
