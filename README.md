@@ -5,6 +5,7 @@ A **festive Discord bot** that brings Christmas spirit, positivity, and emotiona
 ![Bot Status](https://img.shields.io/badge/status-ready%20for%20deployment-green)
 ![Discord.js](https://img.shields.io/badge/discord.js-v14-blue)
 ![Node.js](https://img.shields.io/badge/node-%3E%3D16.9.0-brightgreen)
+![Hosting](https://img.shields.io/badge/hosting-Railway%20%7C%20Render-blueviolet)
 
 ---
 
@@ -41,6 +42,13 @@ The bot detects kind messages containing words like:
 
 **When detected, it responds with praise:**
 > 🎁 You just made the server brighter, keep spreading joy! ✨
+
+---
+
+## 📸 Screenshots
+
+![Bot Status Embed](assets/eve_bot_screenshot.png)
+*The bot's festive status message showcasing its Christmas spirit and positivity!*
 
 ---
 
@@ -162,7 +170,7 @@ Use PM2 to keep the bot running:
 
 ```bash
 npm install -g pm2
-pm2 start index.js --name codeofeve-bot
+pm2 start index.js --name codeofeve_jobinpbinu
 pm2 save
 pm2 startup
 ```
@@ -321,6 +329,29 @@ Want to add more Christmas features? Feel free to:
 **Created with ❤️ for the Code of Eve community**
 
 Bot Name: `codeofeve_jobinpbinu`
+
+---
+
+## 🔗 Invite Link
+
+> [!IMPORTANT]
+> To invite this bot to your Discord server, use the invite link generated from the Discord Developer Portal.
+
+**How to generate your invite link:**
+1. Go to [Discord Developer Portal](https://discord.com/developers/applications)
+2. Select your application (`codeofeve_jobinpbinu`)
+3. Navigate to **OAuth2** → **URL Generator**
+4. Select scopes: `bot` and `applications.commands`
+5. Select permissions: Send Messages, Embed Links, Read Message History, Connect, View Channels
+6. Copy the generated URL
+
+**Replace with your actual invite link:**
+```
+[Insert Your Bot Invite Link Here]
+```
+
+> [!NOTE]
+> If you want to keep your bot private for your server only, you can skip sharing the invite link publicly.
 
 ---
 
