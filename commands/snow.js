@@ -3,7 +3,7 @@ const { SlashCommandBuilder } = require('discord.js');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('snow')
-        .setDescription('Let it snow! Watch the snowflakes fall! ❄️'),
+        .setDescription('Watch a beautiful snowflake animation ❄️'),
 
     async execute(interaction) {
         try {

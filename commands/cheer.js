@@ -5,7 +5,7 @@ const config = require('../config/config.json');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('cheer')
-        .setDescription('Get a motivational holiday message to brighten your day! ✨'),
+        .setDescription('Receive a motivational holiday message ✨'),
 
     async execute(interaction) {
         try {

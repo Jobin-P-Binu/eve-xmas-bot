@@ -5,7 +5,7 @@ const config = require('../config/config.json');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('countdown')
-        .setDescription('See how much time is left until New Year 2027! 🎆'),
+        .setDescription('Live countdown to New Year 2027 🎆'),
 
     async execute(interaction) {
         try {

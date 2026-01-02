@@ -3,7 +3,7 @@ const { SlashCommandBuilder, EmbedBuilder } = require('discord.js');
 module.exports = {
     data: new SlashCommandBuilder()
         .setName('about')
-        .setDescription('Learn about the Christmas Bot and its features! 🎄'),
+        .setDescription('Learn about the bot and its features 🎅'),
 
     async execute(interaction) {
         try {
