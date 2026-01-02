@@ -1,8 +1,8 @@
-const { ActivityType } = require('discord.js');
+const { ActivityType, Events } = require('discord.js');
 const config = require('../config/config.json');
 
 module.exports = {
-    name: 'ready',
+    name: Events.ClientReady,
     once: true,
     async execute(client) {
         console.log('🎄 =====================================');
