@@ -1,100 +1,107 @@
-require('dotenv').config();
-const fs = require('node:fs');
-const path = require('node:path');
-const { Client, Collection, GatewayIntentBits } = require('discord.js');
+require("dotenv").config();
+const { Client, Collection, GatewayIntentBits } = require("discord.js");
+const fs = require("fs");
+const path = require("path");
+const http = require("http");
 
-// Verify environment variables
-if (!process.env.DISCORD_TOKEN) {
-    console.error('❌ ERROR: DISCORD_TOKEN is not set in .env file!');
-    console.error('📝 Please create a .env file and add your bot token.');
-    console.error('💡 See .env.example for reference.');
-    process.exit(1);
-}
-
-// Create Discord client with required intents
-const client = new Client({
-    intents: [
-        GatewayIntentBits.Guilds,
-        GatewayIntentBits.GuildMessages,
-        GatewayIntentBits.GuildVoiceStates,
-        GatewayIntentBits.MessageContent
-    ]
+// ================= KEEP-ALIVE SERVER (Prevents Shutdown) =================
+const server = http.createServer((req, res) => {
+  res.writeHead(200);
+  res.end("Bot is online! 🎄");
 });
 
-// Initialize commands collection
+const PORT = process.env.PORT || 3000;
+server.listen(PORT, () => {
+  console.log(`🌐 Keep-alive server listening on port ${PORT}`);
+});
+
+// ================= CLIENT =================
+const client = new Client({
+  intents: [
+    GatewayIntentBits.Guilds,
+    GatewayIntentBits.GuildMessages,
+    GatewayIntentBits.MessageContent,
+    GatewayIntentBits.GuildVoiceStates,
+  ],
+});
+
 client.commands = new Collection();
 
-// Load command files
-const commandsPath = path.join(__dirname, 'commands');
-const commandFiles = fs.readdirSync(commandsPath).filter(file => file.endsWith('.js'));
+// ================= LOAD COMMANDS =================
+const commandsPath = path.join(__dirname, "commands");
+if (fs.existsSync(commandsPath)) {
+  const commandFiles = fs.readdirSync(commandsPath).filter(f => f.endsWith(".js"));
+  console.log(`🎄 Found ${commandFiles.length} command files.`);
+  
+  for (const file of commandFiles) {
+    try {
+      const filePath = path.join(commandsPath, file);
+      const command = require(filePath);
 
-console.log('🎄 Loading commands...');
-for (const file of commandFiles) {
-    const filePath = path.join(commandsPath, file);
-    const command = require(filePath);
-
-    if ('data' in command && 'execute' in command) {
+      // Check for Slash Command structure (data + execute)
+      if ('data' in command && 'execute' in command) {
         client.commands.set(command.data.name, command);
-        console.log(`  ✅ Loaded command: ${command.data.name}`);
-    } else {
-        console.warn(`  ⚠️  Skipped ${file}: missing 'data' or 'execute' property`);
+        console.log(`✅ Loaded command: ${command.data.name}`);
+      } 
+      // Fallback for older style or simple commands if any
+      else if (command.name && command.execute) {
+        client.commands.set(command.name, command);
+        console.log(`✅ Loaded command: ${command.name}`);
+      } else {
+        console.warn(`⚠️  Skipped ${file}: Missing 'data' or 'execute' property.`);
+      }
+    } catch (error) {
+      console.error(`❌ Error loading command ${file}:`, error);
     }
+  }
 }
 
-// Load event files
-const eventsPath = path.join(__dirname, 'events');
-const eventFiles = fs.readdirSync(eventsPath).filter(file => file.endsWith('.js'));
-
-console.log('🎅 Loading events...');
-for (const file of eventFiles) {
-    const filePath = path.join(eventsPath, file);
-    const event = require(filePath);
-
-    if (event.once) {
-        client.once(event.name, (...args) => event.execute(...args));
-    } else {
-        client.on(event.name, (...args) => event.execute(...args));
+// ================= LOAD EVENTS =================
+const eventsPath = path.join(__dirname, "events");
+if (fs.existsSync(eventsPath)) {
+  const eventFiles = fs.readdirSync(eventsPath).filter(f => f.endsWith(".js"));
+  
+  for (const file of eventFiles) {
+    try {
+      const filePath = path.join(eventsPath, file);
+      const event = require(filePath);
+      
+      if (event.name) {
+          if (event.once) {
+            client.once(event.name, (...args) => event.execute(...args, client));
+          } else {
+            client.on(event.name, (...args) => event.execute(...args, client));
+          }
+          console.log(`✅ Loaded event: ${event.name}`);
+      } else {
+          console.warn(`⚠️  Skipped event ${file}: Missing 'name' property.`);
+      }
+    } catch (error) {
+      console.error(`❌ Error loading event ${file}:`, error);
     }
-    console.log(`  ✅ Loaded event: ${event.name}`);
+  }
 }
 
-// Error handling
-client.on('error', error => {
-    console.error('❌ Discord client error:', error);
+// ================= READY EVENT =================
+client.once("ready", () => {
+  console.log(`🎄 Bot logged in as ${client.user.tag}`);
+  client.user.setActivity("🎄 Spreading Christmas cheer!", { type: 0 });
 });
 
-process.on('unhandledRejection', error => {
-    console.error('❌ Unhandled promise rejection:', error);
+// ================= SAFETY =================
+process.on("unhandledRejection", err => {
+  console.error("❌ Unhandled promise rejection:", err);
 });
 
-// Graceful shutdown
-process.on('SIGINT', () => {
-    console.log('\n🎄 Shutting down gracefully...');
-    client.destroy();
-    process.exit(0);
+process.on("uncaughtException", err => {
+  console.error("❌ Uncaught exception:", err);
+  // Optional: process.exit(1); // Usually safer to restart, but for a simple bot staying alive is sometimes preferred.
 });
 
-process.on('SIGTERM', () => {
-    console.log('\n🎄 Shutting down gracefully...');
-    client.destroy();
-    process.exit(0);
-});
+// ================= LOGIN =================
+if (!process.env.DISCORD_TOKEN) {
+  console.error("❌ ERROR: DISCORD_TOKEN is missing in .env file!");
+  process.exit(1);
+}
 
-// Login to Discord
-console.log('🎁 Logging in to Discord...');
 client.login(process.env.DISCORD_TOKEN);
-
-// --- Fix for Render Deployment (Fake Web Server) ---
-const http = require('http');
-
-const server = http.createServer((req, res) => {
-    res.writeHead(200);
-    res.end('Bot is running!');
-});
-
-// Render sets the PORT environment variable automatically
-const port = process.env.PORT || 3000;
-
-server.listen(port, () => {
-    console.log(`Keep-alive server listening on port ${port}`);
-});
